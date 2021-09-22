@@ -69,8 +69,9 @@ class HomeFragment: BaseFragment() {
     }
 
     private fun searchUserRepositories() {
+        val searchQuery = binding.etSearch.text.toString().trim()
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            homeViewModel.getRepositoryResultsFlow().collectLatest { pagingData ->
+            homeViewModel.getRepositoryResultsFlow(searchQuery).collectLatest { pagingData ->
                 repoAdapter.submitData(pagingData)
             }
         }

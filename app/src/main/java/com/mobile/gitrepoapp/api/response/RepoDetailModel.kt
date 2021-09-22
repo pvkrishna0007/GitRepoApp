@@ -206,9 +206,9 @@ data class RepoDetailModel(
 
     @JsonProperty("open_issues_count")
     var openIssuesCount: Int? = null,
-
-    @JsonProperty("license")
-    var license: String? = null,
+//
+//    @JsonProperty("license")
+//    var license: String? = null,
 
     @JsonProperty("allow_forking")
     var allowForking: Boolean? = null,

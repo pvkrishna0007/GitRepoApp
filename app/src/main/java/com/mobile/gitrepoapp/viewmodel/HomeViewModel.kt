@@ -37,8 +37,8 @@ class HomeViewModel  @Inject constructor(
         return PagingConfig(pageSize = 5, enablePlaceholders = false)
     }
 
-    fun getRepositoryResultsFlow(): Flow<PagingData<RepoDetailModel>> {
-        return repository.getRepositoryResultsFlow(getDefaultPageConfig())
+    fun getRepositoryResultsFlow(search: String): Flow<PagingData<RepoDetailModel>> {
+        return repository.getRepositoryResultsFlow(getDefaultPageConfig(), search)
             .cachedIn(mRepositoryScope)
     }
 

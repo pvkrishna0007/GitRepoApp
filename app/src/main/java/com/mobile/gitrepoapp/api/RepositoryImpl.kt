@@ -30,10 +30,10 @@ class RepositoryImpl(private val apiInterface: ApiInterface): Repository {
 
     //endregion
 
-    override fun getRepositoryResultsFlow(pagingConfig: PagingConfig): Flow<PagingData<RepoDetailModel>> {
+    override fun getRepositoryResultsFlow(pagingConfig: PagingConfig, search: String): Flow<PagingData<RepoDetailModel>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { RepoPagingDataSource(apiInterface) }
+            pagingSourceFactory = { RepoPagingDataSource(apiInterface, search) }
         ).flow
     }
 
