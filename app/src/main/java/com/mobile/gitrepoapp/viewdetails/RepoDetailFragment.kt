@@ -1,4 +1,4 @@
-package com.mobile.gitrepoapp.home
+package com.mobile.gitrepoapp.viewdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -6,10 +6,14 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import com.bumptech.glide.Glide
 import com.mobile.gitrepoapp.R
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 
 /**
@@ -59,4 +63,12 @@ fun ImageView.loadImage(imageUrl: String?) {
         .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_placeholder))
         .error(ContextCompat.getDrawable(context, R.drawable.ic_placeholder))
         .into(this)
+}
+
+fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
+    val query = MutableStateFlow("")
+    doOnTextChanged { text, start, before, count ->
+        query.value = text?.toString()?:""
+    }
+    return query
 }

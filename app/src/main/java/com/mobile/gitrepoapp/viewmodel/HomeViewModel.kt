@@ -1,13 +1,9 @@
 package com.mobile.gitrepoapp.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.mobile.gitrepoapp.api.ApiInterface
-import com.mobile.gitrepoapp.api.ApiResponse
 import com.mobile.gitrepoapp.api.Repository
 import com.mobile.gitrepoapp.api.response.RepoDetailModel
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -25,9 +21,9 @@ class HomeViewModel  @Inject constructor(
 {
     private val mJob = Job()
     private val mRepositoryScope = CoroutineScope(dispatcher + mJob)
-    private var mResultLiveData = MutableLiveData<ApiResponse<RepoDetailModel>>()
+//    private var mResultLiveData = MutableLiveData<ApiResponse<RepoDetailModel>>()
 
-    fun getRepositoryResultsLiveData() = repository.getRepositories("pvkrishna0007")
+//    fun getRepositoryResultsLiveData() = repository.getRepositories("pvkrishna0007")
 
 
     /**

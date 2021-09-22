@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/repoDetailFragment"
-        android:name="com.mobile.gitrepoapp.home.RepoDetailFragment"
+        android:name="com.mobile.gitrepoapp.viewdetails.RepoDetailFragment"
         tools:layout="@layout/fragment_repo_details"
         android:label="RepoDetailFragment" />
 

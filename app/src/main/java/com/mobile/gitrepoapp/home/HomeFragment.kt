@@ -1,23 +1,18 @@
 package com.mobile.gitrepoapp.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobile.gitrepoapp.api.Repository
-import com.mobile.gitrepoapp.api.Status
 import com.mobile.gitrepoapp.app.BaseFragment
 import com.mobile.gitrepoapp.databinding.FragmentHomeBinding
 import com.mobile.gitrepoapp.utils.hideSoftKeyboard
 import com.mobile.gitrepoapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -94,6 +89,26 @@ class HomeFragment: BaseFragment() {
 //                }
 //            }
 //        })
+//    }
+
+//    @ExperimentalCoroutinesApi
+//    @FlowPreview
+//    private fun search() {
+//        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+//            binding.etSearch.getQueryTextChangeStateFlow()
+//                .debounce(300)
+//                .filter { query ->
+//                    return@filter query.isNotEmpty()
+//                }
+//                .distinctUntilChanged()
+//                .flatMapLatest { query ->
+//                    homeViewModel.getRepositoryResultsFlow(query)
+//                }
+//                .flowOn(Dispatchers.Default)
+//                .collect { pagingData ->
+//                    repoAdapter.submitData(pagingData)
+//                }
+//        }
 //    }
 
 }

@@ -65,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"
                 app:lineHeight="14dp"
-                tools:text="Alive" />
+                tools:text="@tools:sample/full_names" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_language"
@@ -80,7 +80,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_avatar"
                 app:layout_constraintTop_toBottomOf="@+id/tv_status"
                 app:lineHeight="14dp"
-                tools:text="Language" />
+                tools:text="@tools:sample/last_names" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_contributions"
@@ -95,7 +95,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_language"
                 app:layout_constraintTop_toBottomOf="@+id/tv_status"
                 app:lineHeight="14dp"
-                tools:text="Counter" />
+                tools:text="1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
