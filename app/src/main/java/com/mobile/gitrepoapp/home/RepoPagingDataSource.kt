@@ -22,14 +22,18 @@ class RepoPagingDataSource(private val service: ApiInterface, private val repoDa
                     page = pageNumber,
                     perPage = AppConfig.PER_PAGE_COUNT
                 ).items.apply {
+                    // deleted db entries while new search query
                     if(pageNumber == 1 && this.isNotEmpty())
                         repoDatabase.repoDao().deleteAll()
+
+                    // Adding the repo items of offline
                     if(repoDatabase.repoDao().getCount() <= AppConfig.OFFLINE_PAGE_COUNT)
                         repoDatabase.repoDao().insertAll(this)
                 }
             }
             else {
                 if(pageNumber == 1) {
+                    // retrieving offline entries if no network
                     repoDatabase.repoDao().getRepoListByLimit(
                         AppConfig.OFFLINE_PAGE_COUNT,
                         pageNumber * AppConfig.OFFLINE_PAGE_COUNT
