@@ -34,7 +34,7 @@ class HomeFragment: BaseFragment() {
     @Inject
     lateinit var homeViewModel: HomeViewModel
 
-    override fun getPageTitle() = "Home"
+    override fun getPageTitle() = getString(R.string.home)
 
     override fun onCreateView(
         inflater: LayoutInflater,

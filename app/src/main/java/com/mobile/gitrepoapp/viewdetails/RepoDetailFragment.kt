@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.mobile.gitrepoapp.R
 import com.mobile.gitrepoapp.api.response.RepoDetailModel
 import com.mobile.gitrepoapp.app.BaseFragment
 import com.mobile.gitrepoapp.databinding.FragmentRepoDetailsBinding
@@ -14,7 +15,7 @@ class RepoDetailFragment: BaseFragment() {
 
     private lateinit var binding: FragmentRepoDetailsBinding
 
-    override fun getPageTitle() = "Repository Details"
+    override fun getPageTitle() = getString(R.string.repository_details)
 
     override fun onCreateView(
         inflater: LayoutInflater,

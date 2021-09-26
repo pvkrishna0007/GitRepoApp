@@ -1,21 +1,27 @@
 package com.mobile.gitrepoapp.utils
 
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.text.bold
+import androidx.core.text.color
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.mobile.gitrepoapp.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -75,13 +81,41 @@ fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
     return query
 }
 
-@BindingAdapter("label_text")
-fun TextView.setLabelText(labelContent: String?) {
-    this.text = labelContent
+@BindingAdapter("prefix", "suffix")
+fun TextView.setContent(prefix: String?, suffix: String?) {
+//    val sourceString = "$prefix : <b>$suffix</b>"
+//    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//        this.text = Html.fromHtml(sourceString, HtmlCompat.FROM_HTML_MODE_COMPACT)
+//    } else {
+//        this.text = Html.fromHtml(sourceString)
+//    }
+    this.text = SpannableStringBuilder()
+        .color ( Color.DKGRAY) { append(prefix) }
+        .append(" :  ")
+        .bold { append(suffix) }
 }
 
 
-@BindingAdapter("prefix", "suffix")
-fun TextView.setContent(prefix: String?, suffix: String?) {
-    this.text = "$prefix::$suffix"
+fun String?.convertToDateTimeFormat(): String {
+    return this.convertStringFromSourceFormatToDestinationFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", "dd MMM yyyy HH:mm:ss")
+}
+/**
+ * This method is used to converting the date string to targeted format.
+ *
+ * @param originalFormat input date format of dateString
+ * @param targetFormat   target date format of the resultant string.
+ * @return which returns the converted date as specified in targetFormat. Which returns empty, if any of the format is invalid
+ */
+fun String?.convertStringFromSourceFormatToDestinationFormat(originalFormat: String, targetFormat: String): String {
+    if (this.isNullOrEmpty()) return ""
+    try {
+        val iFormatter = SimpleDateFormat(originalFormat, Locale.US)
+        val oFormatter = SimpleDateFormat(targetFormat, Locale.US)
+
+        return oFormatter.format(iFormatter.parse(this))
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+    return this
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="repoDetails"
             type="com.mobile.gitrepoapp.api.response.RepoDetailModel" />
@@ -12,59 +13,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/tv_repo_name"
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
-            android:text="@{`Name:`+repoDetails.name}"
-            tools:text="fdaf"
+            android:layout_height="wrap_content"
+            android:text="@{repoDetails.name}"
+            android:textAlignment="center"
             android:textSize="20sp"
-            android:layout_height="wrap_content" />
+            android:textStyle="bold"
+            android:padding="10dp"
+            tools:text="fdaf" />
 
         <TextView
             android:id="@+id/tv_repo_path"
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
-            android:text="@{`Full Path:`+repoDetails.fullName}"
-            tools:text="fdaf"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:prefix="@{@string/full_path}"
+            app:suffix="@{repoDetails.fullName}"
+            tools:text="fdaf" />
 
         <TextView
             android:id="@+id/tv_repo_language"
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
-            android:text="@{String.format(@string/language_, repoDetails.language)}"
-            tools:text="fdaf"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:prefix="@{@string/language}"
+            app:suffix="@{repoDetails.language}"
+            tools:text="fdaf" />
 
         <TextView
             android:id="@+id/tv_num_forks"
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
-            tools:text="fdaf"
-            android:text="@{`Fork Count:`+repoDetails.forksCount.toString()}"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:prefix="@{@string/fork_count}"
+            app:suffix="@{repoDetails.forksCount.toString()}"
+            tools:text="fdaf" />
 
         <TextView
             android:id="@+id/tv_num_contributors"
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
-            tools:text="fdaf"
-            app:prefix="@{`Contributions`}"
+            android:layout_height="wrap_content"
+            app:prefix="@{@string/contributions}"
             app:suffix="@{repoDetails.contributorsUrl}"
-            android:layout_height="wrap_content" />
+            tools:text="fdaf" />
 
         <TextView
             android:id="@+id/tv_num_created"
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
-            tools:text="fdaf"
-            app:prefix="@{`Created At`}"
-            app:suffix="@{repoDetails.pushedAt}"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:prefix="@{@string/created_at}"
+            app:suffix="@{repoDetails.pushedAtByFormat()}"
+            tools:text="fdaf" />
 
     </LinearLayout>
 </layout>
