@@ -39,6 +39,12 @@ class RepoDetailFragment: BaseFragment() {
             })
         }
 
+//        binding.tvNumContributors.setOnClickListener {
+//            findNavController().navigate(R.id.action_repoDetailFragment_to_repoWebDetailsFragment, Bundle().apply {
+//                putString("webUrl", repoDetails?.collaboratorsUrl)
+//            })
+//        }
+
     }
 
 }

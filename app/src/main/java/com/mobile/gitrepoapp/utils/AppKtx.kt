@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.core.text.color
+import androidx.core.text.underline
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -81,8 +82,8 @@ fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
     return query
 }
 
-@BindingAdapter("prefix", "suffix")
-fun TextView.setContent(prefix: String?, suffix: String?) {
+@BindingAdapter(value = ["prefix", "suffix", "suffixAsLink"], requireAll = false)
+fun TextView.setContent(prefix: String?, suffix: String?, suffixAsLink: Boolean = false) {
 //    val sourceString = "$prefix : <b>$suffix</b>"
 //    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 //        this.text = Html.fromHtml(sourceString, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -92,7 +93,7 @@ fun TextView.setContent(prefix: String?, suffix: String?) {
     this.text = SpannableStringBuilder()
         .color ( Color.DKGRAY) { append(prefix) }
         .append(" :  ")
-        .bold { append(suffix) }
+        .bold { if(suffixAsLink) underline { color(Color.BLUE) { append(suffix) } } else append(suffix) }
 }
 
 

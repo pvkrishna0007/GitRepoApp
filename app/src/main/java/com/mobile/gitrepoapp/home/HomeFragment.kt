@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.mobile.gitrepoapp.R
@@ -15,9 +16,10 @@ import com.mobile.gitrepoapp.databinding.FragmentHomeBinding
 import com.mobile.gitrepoapp.utils.hideSoftKeyboard
 import com.mobile.gitrepoapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.collectLatest
+import okhttp3.Dispatcher
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -48,12 +50,11 @@ class HomeFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchUserRepositories()
-
         binding.tvSearch.setEndIconOnClickListener {
             // handle end search icon action click
             it.hideSoftKeyboard()
             searchUserRepositories()
+            setSearchHintView(false)
         }
 
         binding.etSearch.setOnEditorActionListener { view, actionId, _ ->
@@ -61,6 +62,7 @@ class HomeFragment: BaseFragment() {
             if ((actionId == EditorInfo.IME_ACTION_DONE) or (actionId == KeyEvent.ACTION_DOWN)) {
                 view.hideSoftKeyboard()
                 searchUserRepositories()
+                setSearchHintView(false)
             }
             true
         }
@@ -70,7 +72,8 @@ class HomeFragment: BaseFragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            homeViewModel.repositoryResultsFlow?.collectLatest { pagingData ->
+            //To set data to the adapter
+            homeViewModel.repositoryResultsFlow.collectLatest { pagingData ->
                 repoAdapter.submitData(pagingData)
             }
         }
@@ -93,6 +96,9 @@ class HomeFragment: BaseFragment() {
         homeViewModel.searchRepositories(searchQuery)
     }
 
+    private fun setSearchHintView(isVisible: Boolean) {
+        binding.tvMessage.isVisible = isVisible
+    }
 //    private fun searchUserRepositories() {
 //        repository.getRepositories("pvkrishna0007").observe(viewLifecycleOwner, {
 //            Log.d("TAG", "onCreate: $it")

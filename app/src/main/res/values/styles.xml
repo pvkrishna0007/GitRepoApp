@@ -3,6 +3,6 @@
     <style name="DetailTextStyle">
 <!--        <item name="android:textStyle">bold</item>-->
         <item name="android:textColor">@color/black</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">6dp</item>
     </style>
 </resources>

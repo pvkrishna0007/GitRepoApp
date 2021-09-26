@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@{repoDetails.name}"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp_20"
             android:textStyle="bold"
             android:padding="10dp"
             tools:text="fdaf" />
@@ -33,8 +33,9 @@
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:prefix="@{@string/full_path}"
+            app:prefix="@{@string/project_link}"
             app:suffix="@{repoDetails.fullName}"
+            app:suffixAsLink="@{true}"
             tools:text="fdaf" />
 
         <TextView
@@ -60,7 +61,7 @@
             style="@style/DetailTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:prefix="@{@string/contributions}"
+            app:prefix="@{@string/contributors}"
             app:suffix="@{repoDetails.contributorsUrl}"
             tools:text="fdaf" />
 
@@ -71,6 +72,15 @@
             android:layout_height="wrap_content"
             app:prefix="@{@string/created_at}"
             app:suffix="@{repoDetails.pushedAtByFormat()}"
+            tools:text="fdaf" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            style="@style/DetailTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefix="@{@string/description}"
+            app:suffix="@{repoDetails.description}"
             tools:text="fdaf" />
 
     </LinearLayout>
