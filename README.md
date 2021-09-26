@@ -2,13 +2,13 @@
 
 Which displays list of repositories for the given search query.
 
-Home:
+###Home
 ·  A search bar to search from git API's
 ·  A recycler view using card view to display the search results.
 ·  The results count should be limited to 10 per page.
 ·  Clicking on an item to go to Repo Details Activity.
 
-Repo Details:
+###Repo Details
 ·  This Activity should have a detailed description of the selected item.
 ·  Details such as Image, Name, Project Link, Description, Contributors should be displayed.
 ·  When you click on the "project link" section, you have to open a web view to show the content of the link available as shown in the video attached.
