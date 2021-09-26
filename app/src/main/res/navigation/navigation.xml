@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.mobile.gitrepoapp.home.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_repoDetailFragment"
             app:destination="@id/repoDetailFragment" />
@@ -18,7 +18,17 @@
     <fragment
         android:id="@+id/repoDetailFragment"
         android:name="com.mobile.gitrepoapp.viewdetails.RepoDetailFragment"
-        tools:layout="@layout/fragment_repo_details"
-        android:label="RepoDetailFragment" />
+        android:label="RepoDetailFragment"
+        tools:layout="@layout/fragment_repo_details" >
+        <action
+            android:id="@+id/action_repoDetailFragment_to_repoWebDetailsFragment"
+            app:destination="@id/repoWebDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repoWebDetailsFragment"
+        android:name="com.mobile.gitrepoapp.viewdetails.RepoWebDetailsFragment"
+        android:label="RepoWebDetailsFragment"
+        tools:layout="@layout/fragment_project_details" />
 
 </navigation>

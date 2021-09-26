@@ -2,6 +2,8 @@
 
 Which displays list of repositories for the given search query.
 
+Use this link to get the latest app file:
+
 ## Navigation Library
 contains all of your destinations and actions. The graph represents all of our app's navigation paths.
 
@@ -26,5 +28,3 @@ To load the image from network in efficient way
 ## Stetho Library
 To monitor the api request and responses
 
-
-Use this link to get the latest app file:
