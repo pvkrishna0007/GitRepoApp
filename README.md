@@ -15,9 +15,9 @@ Which displays list of repositories for the given search query.
 
 GIT DEVELOPERS URL: https://developer.github.com/v3/search/
 
-Use this link to get the latest app file: https://github.com/pvkrishna0007/GitRepoApp/blob/master/GitRepoApp_V1.apk
+Use this link to get the latest app file: https://github.com/pvkrishna0007/GitRepoApp/raw/master/GitRepoApp_V1.apk
 
-* Following libraries are used in this project.
+Following libraries are used in this project.
 
 ## Navigation Library
 contains all of your destinations and actions. The graph represents all of our app's navigation paths.
