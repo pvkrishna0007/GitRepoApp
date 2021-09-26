@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">GitRepoApp</string>
     <string name="search">Search</string>
+    <string name="language_">Language: %s</string>
+    <string name="fork_count_">Fork Count: %s</string>
+
 </resources>

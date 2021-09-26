@@ -12,6 +12,8 @@ import javax.inject.Inject
 class RepoAdapter @Inject constructor() :
     PagingDataAdapter<RepoDetailModel, RepoAdapter.RepoViewHolder>(RepoComparator) {
 
+    private lateinit var itemClickCallback: (RepoDetailModel) -> Unit
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RepoViewHolder(
             RowRepoItemBinding.inflate(
@@ -21,6 +23,13 @@ class RepoAdapter @Inject constructor() :
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
+        holder.itemView.setOnClickListener {
+            itemClickCallback.invoke(getItem(position)!!)
+        }
+    }
+
+    fun itemClickCallback(itemClickCallback: (RepoDetailModel) -> Unit) {
+        this.itemClickCallback = itemClickCallback
     }
 
     inner class RepoViewHolder(private val binding: RowRepoItemBinding) :

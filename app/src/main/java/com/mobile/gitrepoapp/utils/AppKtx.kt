@@ -8,8 +8,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.mobile.gitrepoapp.R
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,4 +73,15 @@ fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
         query.value = text?.toString()?:""
     }
     return query
+}
+
+@BindingAdapter("label_text")
+fun TextView.setLabelText(labelContent: String?) {
+    this.text = labelContent
+}
+
+
+@BindingAdapter("prefix", "suffix")
+fun TextView.setContent(prefix: String?, suffix: String?) {
+    this.text = "$prefix::$suffix"
 }

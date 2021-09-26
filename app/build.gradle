@@ -61,6 +61,11 @@ dependencies {
     /* Paging 3 */
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
+    /* Room components */
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
     /* Jackson response parse library */
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
@@ -83,7 +88,6 @@ dependencies {
     /* Stetho */
     implementation 'com.facebook.stetho:stetho:1.6.0'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.6.0' // for OkHttp library
-
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

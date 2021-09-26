@@ -7,15 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.mobile.gitrepoapp.R
 import com.mobile.gitrepoapp.api.Repository
 import com.mobile.gitrepoapp.app.BaseFragment
 import com.mobile.gitrepoapp.databinding.FragmentHomeBinding
 import com.mobile.gitrepoapp.utils.hideSoftKeyboard
 import com.mobile.gitrepoapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 @AndroidEntryPoint
 class HomeFragment: BaseFragment() {
 
@@ -27,6 +33,8 @@ class HomeFragment: BaseFragment() {
     lateinit var repoAdapter: RepoAdapter
     @Inject
     lateinit var homeViewModel: HomeViewModel
+
+    override fun getPageTitle() = "Home"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,15 +69,28 @@ class HomeFragment: BaseFragment() {
             adapter = repoAdapter
         }
 
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            homeViewModel.repositoryResultsFlow?.collectLatest { pagingData ->
+                repoAdapter.submitData(pagingData)
+            }
+        }
+
+        repoAdapter.itemClickCallback() { repoDetailModel ->
+            findNavController().navigate(R.id.action_homeFragment_to_repoDetailFragment, Bundle().apply {
+                putParcelable("model", repoDetailModel)
+            })
+        }
+
     }
 
     private fun searchUserRepositories() {
         val searchQuery = binding.etSearch.text.toString().trim()
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            homeViewModel.getRepositoryResultsFlow(searchQuery).collectLatest { pagingData ->
-                repoAdapter.submitData(pagingData)
-            }
-        }
+//        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+//            homeViewModel.getRepositoryResultsFlow(searchQuery).collectLatest { pagingData ->
+//                repoAdapter.submitData(pagingData)
+//            }
+//        }
+        homeViewModel.searchRepositories(searchQuery)
     }
 
 //    private fun searchUserRepositories() {

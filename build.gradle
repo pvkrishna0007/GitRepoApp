@@ -32,4 +32,5 @@ ext {
     hiltVersion = "2.37"
     hiltAndroidXVersion = '1.0.0'
     pagingVersion = "3.0.1"
+    roomVersion = '2.3.0'
 }

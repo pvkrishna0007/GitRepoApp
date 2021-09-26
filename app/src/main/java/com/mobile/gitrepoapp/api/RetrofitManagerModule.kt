@@ -1,11 +1,14 @@
 package com.mobile.gitrepoapp.api
 
+import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.mobile.gitrepoapp.database.RepoDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -35,12 +38,21 @@ object RetrofitManagerModule {
     }
 
     /**
+     *  Created RepoDatabase object for offline
+     */
+    @Provides
+    @Singleton
+    fun provideRepoDatabase(@ApplicationContext context: Context): RepoDatabase {
+        return RepoDatabase.getDatabase(context)
+    }
+
+    /**
      *  Created Repository object
      */
     @Provides
     @Singleton
-    fun provideRepository(apiInterface: ApiInterface): Repository {
-        return RepositoryImpl(apiInterface)
+    fun provideRepository(apiInterface: ApiInterface, repoDatabase: RepoDatabase, @ApplicationContext context: Context): Repository {
+        return RepositoryImpl(apiInterface, repoDatabase, context)
     }
 
     /**

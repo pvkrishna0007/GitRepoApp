@@ -17,7 +17,7 @@ interface ApiInterface {
                                 @Query("page")page: Int
     ): List<RepoDetailModel>
 
-    @GET("search/repositories?q=q&page=1&per_page=3")
+    @GET("search/repositories")
     suspend fun searchRepositories(@Query("q")search: String,
                                 @Query("per_page")perPage: Int,
                                 @Query("page")page: Int
