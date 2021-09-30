@@ -65,6 +65,7 @@ fun Context.isNetworkAvailable(): Boolean {
     return false
 }
 
+@BindingAdapter("load_image")
 fun ImageView.loadImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
@@ -84,12 +85,6 @@ fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
 
 @BindingAdapter(value = ["prefix", "suffix", "suffixAsLink"], requireAll = false)
 fun TextView.setContent(prefix: String?, suffix: String?, suffixAsLink: Boolean = false) {
-//    val sourceString = "$prefix : <b>$suffix</b>"
-//    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//        this.text = Html.fromHtml(sourceString, HtmlCompat.FROM_HTML_MODE_COMPACT)
-//    } else {
-//        this.text = Html.fromHtml(sourceString)
-//    }
     this.text = SpannableStringBuilder()
         .color ( Color.DKGRAY) { append(prefix) }
         .append(" :  ")
@@ -113,7 +108,7 @@ fun String?.convertStringFromSourceFormatToDestinationFormat(originalFormat: Str
         val iFormatter = SimpleDateFormat(originalFormat, Locale.US)
         val oFormatter = SimpleDateFormat(targetFormat, Locale.US)
 
-        return oFormatter.format(iFormatter.parse(this))
+        return oFormatter.format(iFormatter.parse(this)!!)
     } catch (e: Exception) {
         e.printStackTrace()
     }

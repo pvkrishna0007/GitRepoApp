@@ -11,26 +11,25 @@ import com.mobile.gitrepoapp.database.RepoDatabase
 import com.mobile.gitrepoapp.home.RepoPagingDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import java.io.IOException
 
 class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDatabase: RepoDatabase,
                      private val context: Context): Repository {
 
-
-    //region Repositories
-
-    /**
-     * To get the list of repositories for the given user as live data
-     */
-//    override fun getRepositories(repoUser: String, perPage: Int, page: Int) = liveData(Dispatchers.IO) {
-//        emit(ApiResponse.loading(data = null))
-//        try {
-//            val baseModel = apiInterface.getRepositories(repoUser = repoUser, perPage = perPage, page = page)
-//            emit(ApiResponse.success(data = baseModel))
-//        } catch (exception: Exception) {
-//            emit(ApiResponse.error(data = null, message = exception.message ?: "Error Occurred!"))
-//        }
-//    }
-
+    //region Base Exception Handling
+    private suspend fun <T> safeApiCall(apiCall: suspend () -> T): ApiResponse<T> {
+        return try {
+            val response = apiCall.invoke()
+            ApiResponse.success(response)
+        } catch (throwable: Throwable) {
+            when (throwable) {
+                is IOException -> ApiResponse.error(data = null, message = throwable.message ?: "Error Occurred!")
+                else -> {
+                    ApiResponse.error(data = null, message = throwable.message ?: "Error Occurred!")
+                }
+            }
+        }
+    }
     //endregion
 
     override fun getRepositoryResultsFlow(pagingConfig: PagingConfig, search: String): Flow<PagingData<RepoDetailModel>> {
@@ -39,6 +38,10 @@ class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDat
             config = pagingConfig,
             pagingSourceFactory = { RepoPagingDataSource(apiInterface, repoDatabase, context, search) }
         ).flow
+    }
+
+    override fun getUserRepositories2(userName: String, perPage: Int, page: Int)  = liveData(Dispatchers.IO) {
+        emit(safeApiCall { apiInterface.getRepositories(userName, perPage, page) })
     }
 
 }

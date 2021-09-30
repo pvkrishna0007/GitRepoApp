@@ -8,8 +8,6 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-    @GET("search/code")
-    suspend fun search(): String
 
     @GET("users/{repoUser}/repos")
     suspend fun getRepositories(@Path("repoUser")repoUser: String,

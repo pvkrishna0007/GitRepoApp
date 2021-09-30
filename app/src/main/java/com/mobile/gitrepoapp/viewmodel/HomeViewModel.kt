@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
-import androidx.lifecycle.distinctUntilChanged
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -13,10 +12,7 @@ import com.mobile.gitrepoapp.api.response.RepoDetailModel
 import com.mobile.gitrepoapp.utils.AppConfig
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @FlowPreview
@@ -29,7 +25,7 @@ class HomeViewModel  @Inject constructor(
 {
     private val mJob = Job()
     private val mRepositoryScope = CoroutineScope(dispatcher + mJob)
-    private val queryLiveData = MutableLiveData(AppConfig.DEFAULT_QUERY)
+    val queryLiveData = MutableLiveData(AppConfig.DEFAULT_QUERY)
     val repositoryResultsFlow : Flow<PagingData<RepoDetailModel>>
 
     init {
@@ -53,10 +49,6 @@ class HomeViewModel  @Inject constructor(
                 repository.getRepositoryResultsFlow(getDefaultPageConfig(), searchQuery)
                     .cachedIn(mRepositoryScope)
             }
-    }
-
-    fun searchRepositories(search: String) {
-        queryLiveData.postValue(search)
     }
 
     override fun onCleared() {
