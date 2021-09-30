@@ -86,9 +86,9 @@ fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
 @BindingAdapter(value = ["prefix", "suffix", "suffixAsLink"], requireAll = false)
 fun TextView.setContent(prefix: String?, suffix: String?, suffixAsLink: Boolean = false) {
     this.text = SpannableStringBuilder()
-        .color ( Color.DKGRAY) { append(prefix) }
+        .color ( Color.DKGRAY) { append(prefix?:"") }
         .append(" :  ")
-        .bold { if(suffixAsLink) underline { color(Color.BLUE) { append(suffix) } } else append(suffix) }
+        .bold { if(suffixAsLink) underline { color(Color.BLUE) { append(suffix?:"") } } else append(suffix?:"") }
 }
 
 

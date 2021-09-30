@@ -11,7 +11,7 @@ import com.mobile.gitrepoapp.app.BaseFragment
 import com.mobile.gitrepoapp.databinding.FragmentProjectDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
+// adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/repo/pvkrishna0007/GitRepoApp"
 @AndroidEntryPoint
 class RepoWebDetailsFragment: BaseFragment() {
 
@@ -29,7 +29,8 @@ class RepoWebDetailsFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val webUrl = arguments?.getString("webUrl")?: "https://github.com/pvkrishna0007/GitRepoApp"
+        val repoPath = arguments?.getString("repoPath")?: "pvkrishna0007/GitRepoApp"
+        val webUrl = "https://github.com/$repoPath"
 
         binding.wvContent.settings.javaScriptEnabled = true
         binding.wvContent.settings.setAppCacheEnabled(true)

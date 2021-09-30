@@ -13,6 +13,11 @@
         <action
             android:id="@+id/action_homeFragment_to_repoDetailFragment"
             app:destination="@id/repoDetailFragment" />
+
+        <argument
+            android:name="repoName"
+            android:defaultValue=""/>
+        <deepLink app:uri="www.example.com/search/{repoName}" />
     </fragment>
 
     <fragment
@@ -29,6 +34,12 @@
         android:id="@+id/repoWebDetailsFragment"
         android:name="com.mobile.gitrepoapp.viewdetails.RepoWebDetailsFragment"
         android:label="RepoWebDetailsFragment"
-        tools:layout="@layout/fragment_project_details" />
+        tools:layout="@layout/fragment_project_details" >
+
+        <argument
+            android:name="repoPath"
+            android:defaultValue=""/>
+        <deepLink app:uri="www.example.com/repo/{repoPath}" />
+    </fragment>
 
 </navigation>

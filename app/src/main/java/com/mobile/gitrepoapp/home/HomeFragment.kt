@@ -20,6 +20,11 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+/**
+ * If you want to load the list of repositories with the name(eg:River) with deep link.
+ *  adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/search/River"
+ *  adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/search/pvkrishna0007/GitRepoApp"
+ */
 @ExperimentalCoroutinesApi
 @FlowPreview
 @AndroidEntryPoint
@@ -40,6 +45,8 @@ class HomeFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val repositoryName = arguments?.getString("repoName")
+        homeViewModel.queryLiveData.value = repositoryName // Repo Name here
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

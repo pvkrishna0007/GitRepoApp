@@ -11,6 +11,7 @@ import com.mobile.gitrepoapp.database.RepoDatabase
 import com.mobile.gitrepoapp.home.RepoPagingDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
 import java.io.IOException
 
 class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDatabase: RepoDatabase,
@@ -24,6 +25,7 @@ class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDat
         } catch (throwable: Throwable) {
             when (throwable) {
                 is IOException -> ApiResponse.error(data = null, message = throwable.message ?: "Error Occurred!")
+                is HttpException -> ApiResponse.error(data = null, message = "${throwable.code()} - ${throwable.message()}")
                 else -> {
                     ApiResponse.error(data = null, message = throwable.message ?: "Error Occurred!")
                 }

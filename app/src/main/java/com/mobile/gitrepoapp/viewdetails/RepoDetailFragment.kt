@@ -42,7 +42,7 @@ class RepoDetailFragment: BaseFragment() {
 
         binding.tvRepoPath.setOnClickListener {
             findNavController().navigate(R.id.action_repoDetailFragment_to_repoWebDetailsFragment, Bundle().apply {
-                putString("webUrl", "https://github.com/${repoDetails?.fullName}")
+                putString("repoPath", repoDetails?.fullName)
             })
         }
 
@@ -52,7 +52,7 @@ class RepoDetailFragment: BaseFragment() {
 //            })
 //        }
 
-        repository.getUserRepositories2("pvkrishna0007", 10, 1).observe(
+        repository.getUserRepositories2("pvkrishna0007", 12, 2).observe(
             viewLifecycleOwner,
             { apiResponse ->
                 when (apiResponse.status) {

@@ -43,6 +43,7 @@ class HomeViewModel  @Inject constructor(
     private fun getRepositoryListAsFlow(): Flow<PagingData<RepoDetailModel>> {
         return queryLiveData
             .asFlow()
+            .filter { it.length > 2 }
             .distinctUntilChanged()
             .debounce(300)
             .flatMapLatest { searchQuery ->
