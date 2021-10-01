@@ -3,6 +3,7 @@ package com.mobile.gitrepoapp.api.response
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -26,10 +27,6 @@ data class RepoDetailModel(
 
     @JsonProperty("private")
     var _private: Boolean? = null,
-
-//
-//    @JsonProperty("owner")
-//    var owner: Owner? = null,
 
     @JsonProperty("html_url")
     var htmlUrl: String? = null,
@@ -233,174 +230,13 @@ data class RepoDetailModel(
     var watchers: Int? = null,
 
     @JsonProperty("default_branch")
-    var defaultBranch: String? = null
+    var defaultBranch: String? = null,
 
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString()
-    ) {
-    }
+    @Ignore
+    @JsonProperty("owner")
+    var owner: Owner? = null
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(id)
-        parcel.writeString(nodeId)
-        parcel.writeString(name)
-        parcel.writeString(fullName)
-        parcel.writeValue(_private)
-        parcel.writeString(htmlUrl)
-        parcel.writeString(description)
-        parcel.writeValue(fork)
-        parcel.writeString(url)
-        parcel.writeString(forksUrl)
-        parcel.writeString(keysUrl)
-        parcel.writeString(collaboratorsUrl)
-        parcel.writeString(teamsUrl)
-        parcel.writeString(hooksUrl)
-        parcel.writeString(issueEventsUrl)
-        parcel.writeString(eventsUrl)
-        parcel.writeString(assigneesUrl)
-        parcel.writeString(branchesUrl)
-        parcel.writeString(tagsUrl)
-        parcel.writeString(blobsUrl)
-        parcel.writeString(gitTagsUrl)
-        parcel.writeString(gitRefsUrl)
-        parcel.writeString(treesUrl)
-        parcel.writeString(statusesUrl)
-        parcel.writeString(languagesUrl)
-        parcel.writeString(stargazersUrl)
-        parcel.writeString(contributorsUrl)
-        parcel.writeString(subscribersUrl)
-        parcel.writeString(subscriptionUrl)
-        parcel.writeString(commitsUrl)
-        parcel.writeString(gitCommitsUrl)
-        parcel.writeString(commentsUrl)
-        parcel.writeString(issueCommentUrl)
-        parcel.writeString(contentsUrl)
-        parcel.writeString(compareUrl)
-        parcel.writeString(mergesUrl)
-        parcel.writeString(archiveUrl)
-        parcel.writeString(downloadsUrl)
-        parcel.writeString(issuesUrl)
-        parcel.writeString(pullsUrl)
-        parcel.writeString(milestonesUrl)
-        parcel.writeString(notificationsUrl)
-        parcel.writeString(labelsUrl)
-        parcel.writeString(releasesUrl)
-        parcel.writeString(deploymentsUrl)
-        parcel.writeString(createdAt)
-        parcel.writeString(updatedAt)
-        parcel.writeString(pushedAt)
-        parcel.writeString(gitUrl)
-        parcel.writeString(sshUrl)
-        parcel.writeString(cloneUrl)
-        parcel.writeString(svnUrl)
-        parcel.writeString(homepage)
-        parcel.writeValue(size)
-        parcel.writeValue(stargazersCount)
-        parcel.writeValue(watchersCount)
-        parcel.writeString(language)
-        parcel.writeValue(hasIssues)
-        parcel.writeValue(hasProjects)
-        parcel.writeValue(hasDownloads)
-        parcel.writeValue(hasWiki)
-        parcel.writeValue(hasPages)
-        parcel.writeValue(forksCount)
-        parcel.writeString(mirrorUrl)
-        parcel.writeValue(archived)
-        parcel.writeValue(disabled)
-        parcel.writeValue(openIssuesCount)
-        parcel.writeValue(allowForking)
-        parcel.writeValue(forks)
-        parcel.writeValue(openIssues)
-        parcel.writeValue(watchers)
-        parcel.writeString(defaultBranch)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<RepoDetailModel> {
-        override fun createFromParcel(parcel: Parcel): RepoDetailModel {
-            return RepoDetailModel(parcel)
-        }
-
-        override fun newArray(size: Int): Array<RepoDetailModel?> {
-            return arrayOfNulls(size)
-        }
-    }
-
+) {
     @JsonIgnore
     fun pushedAtByFormat() = pushedAt.convertToDateTimeFormat()
 }

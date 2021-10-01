@@ -1,6 +1,7 @@
 package com.mobile.gitrepoapp.viewdetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class RepoWebDetailsFragment: BaseFragment() {
 
         val repoPath = arguments?.getString("repoPath")?: "pvkrishna0007/GitRepoApp"
         val webUrl = "https://github.com/$repoPath"
+        Log.e("TAG", "onViewCreated: $webUrl", )
 
         binding.wvContent.settings.javaScriptEnabled = true
         binding.wvContent.settings.setAppCacheEnabled(true)

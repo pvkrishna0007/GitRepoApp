@@ -1,6 +1,7 @@
 package com.mobile.gitrepoapp.viewdetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.mobile.gitrepoapp.databinding.FragmentRepoDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+// adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/repoDetails/pvkrishna0007/GitRepoApp"
 @AndroidEntryPoint
 class RepoDetailFragment: BaseFragment() {
 
@@ -37,7 +39,51 @@ class RepoDetailFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repoDetails = requireArguments().getParcelable<RepoDetailModel>("model")
+        //https://api.github.com/repos/octocat/Hello-World
+
+        getRepoDetails()
+
+    }
+
+    private fun getRepoDetails() {
+        val userName = arguments?.getString("userName")?:""
+        val repositoryName = arguments?.getString("repositoryName")?:""
+
+        Log.e("RepoDetailFragment", "getRepoDetails: UserName:$userName  Repo:$repositoryName")
+
+        repository.getRepositoryDetailsByPath(userName, repositoryName).observe(
+            viewLifecycleOwner,
+            { apiResponse ->
+                when (apiResponse.status) {
+                    Status.LOADING -> {
+                        Toast.makeText(context, "loading", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.SUCCESS -> {
+                        setUI(apiResponse.data)
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(context, apiResponse.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+//        repository.getUserRepositories("pvkrishna0007", 12, 2).observe(
+//            viewLifecycleOwner,
+//            { apiResponse ->
+//                when (apiResponse.status) {
+//                    Status.LOADING -> {
+//                        Toast.makeText(context, "loading", Toast.LENGTH_SHORT).show()
+//                    }
+//                    Status.SUCCESS -> {
+//                        Toast.makeText(context, "Size: ${apiResponse.data?.size?:0}", Toast.LENGTH_SHORT).show()
+//                    }
+//                    Status.ERROR -> {
+//                        Toast.makeText(context, apiResponse.message, Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            })
+    }
+
+    private fun setUI(repoDetails: RepoDetailModel?) {
         binding.repoDetails = repoDetails
 
         binding.tvRepoPath.setOnClickListener {
@@ -51,23 +97,6 @@ class RepoDetailFragment: BaseFragment() {
 //                putString("webUrl", repoDetails?.collaboratorsUrl)
 //            })
 //        }
-
-        repository.getUserRepositories2("pvkrishna0007", 12, 2).observe(
-            viewLifecycleOwner,
-            { apiResponse ->
-                when (apiResponse.status) {
-                    Status.LOADING -> {
-                        Toast.makeText(context, "loading", Toast.LENGTH_SHORT).show()
-                    }
-                    Status.SUCCESS -> {
-                        Toast.makeText(context, "Size: ${apiResponse.data?.size?:0}", Toast.LENGTH_SHORT).show()
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(context, apiResponse.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-
     }
 
 }

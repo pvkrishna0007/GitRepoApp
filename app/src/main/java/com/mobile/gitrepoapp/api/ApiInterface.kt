@@ -10,7 +10,7 @@ interface ApiInterface {
 
 
     @GET("users/{repoUser}/repos")
-    suspend fun getRepositories(@Path("repoUser")repoUser: String,
+    suspend fun getUserRepositories(@Path("repoUser")repoUser: String,
                                 @Query("per_page")perPage: Int,
                                 @Query("page")page: Int
     ): List<RepoDetailModel>
@@ -21,4 +21,9 @@ interface ApiInterface {
                                 @Query("page")page: Int
     ): RepoCollectionModel
 
+    // https://api.github.com/repos/octocat/Hello-World
+    @GET("repos/{userName}/{repositoryName}")
+    suspend fun getRepositoryDetailsByPath(@Path("userName")userName: String,
+                                           @Path("repositoryName")repositoryName: String
+    ): RepoDetailModel
 }

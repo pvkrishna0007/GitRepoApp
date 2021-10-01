@@ -28,6 +28,14 @@
         <action
             android:id="@+id/action_repoDetailFragment_to_repoWebDetailsFragment"
             app:destination="@id/repoWebDetailsFragment" />
+
+        <argument
+            android:name="userName"
+            android:defaultValue=""/>
+        <argument
+            android:name="repositoryName"
+            android:defaultValue=""/>
+        <deepLink app:uri="www.example.com/repoDetails/{userName}/{repositoryName}" />
     </fragment>
 
     <fragment

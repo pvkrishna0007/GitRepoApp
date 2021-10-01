@@ -12,6 +12,7 @@ import com.mobile.gitrepoapp.home.RepoPagingDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
+import retrofit2.http.Path
 import java.io.IOException
 
 class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDatabase: RepoDatabase,
@@ -42,8 +43,12 @@ class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDat
         ).flow
     }
 
-    override fun getUserRepositories2(userName: String, perPage: Int, page: Int)  = liveData(Dispatchers.IO) {
-        emit(safeApiCall { apiInterface.getRepositories(userName, perPage, page) })
+    override fun getUserRepositories(userName: String, perPage: Int, page: Int)  = liveData(Dispatchers.IO) {
+        emit(safeApiCall { apiInterface.getUserRepositories(userName, perPage, page) })
+    }
+
+    override fun getRepositoryDetailsByPath(userName: String, repositoryName: String)  = liveData(Dispatchers.IO) {
+        emit(safeApiCall { apiInterface.getRepositoryDetailsByPath(userName, repositoryName) })
     }
 
 }

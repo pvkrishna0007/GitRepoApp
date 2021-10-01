@@ -83,7 +83,8 @@ class HomeFragment: BaseFragment() {
 
         repoAdapter.itemClickCallback { repoDetailModel ->
             findNavController().navigate(R.id.action_homeFragment_to_repoDetailFragment, Bundle().apply {
-                putParcelable("model", repoDetailModel)
+                putString("userName", repoDetailModel.owner?.login)
+                putString("repositoryName", repoDetailModel.name)
             })
         }
 

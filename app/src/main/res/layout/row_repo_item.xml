@@ -30,6 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="16dp"
+                load_image="@{repoItem.owner.avatarUrl}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <com.google.android.material.textview.MaterialTextView

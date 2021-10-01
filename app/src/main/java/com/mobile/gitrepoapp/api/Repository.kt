@@ -12,6 +12,7 @@ interface Repository {
 
     fun getRepositoryResultsFlow(pagingConfig: PagingConfig, search: String): Flow<PagingData<RepoDetailModel>>
 
-    fun getUserRepositories2(userName: String, perPage: Int, page: Int): LiveData<ApiResponse<List<RepoDetailModel>>>
+    fun getUserRepositories(userName: String, perPage: Int, page: Int): LiveData<ApiResponse<List<RepoDetailModel>>>
 
+    fun getRepositoryDetailsByPath(userName: String, repositoryName: String): LiveData<ApiResponse<RepoDetailModel>>
 }
