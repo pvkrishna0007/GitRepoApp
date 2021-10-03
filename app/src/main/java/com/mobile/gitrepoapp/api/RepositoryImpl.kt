@@ -35,6 +35,7 @@ class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDat
     }
     //endregion
 
+    //region API implementations
     override fun getRepositoryResultsFlow(pagingConfig: PagingConfig, search: String): Flow<PagingData<RepoDetailModel>> {
         Log.d("RepositoryImpl", "Search: $search")
         return Pager(
@@ -50,5 +51,6 @@ class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDat
     override fun getRepositoryDetailsByPath(userName: String, repositoryName: String)  = liveData(Dispatchers.IO) {
         emit(safeApiCall { apiInterface.getRepositoryDetailsByPath(userName, repositoryName) })
     }
+    //endregion
 
 }

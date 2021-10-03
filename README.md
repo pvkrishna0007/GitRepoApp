@@ -19,14 +19,14 @@ syntax: http://www.example.com/search/{RepositorySearchText}
 
 example: http://www.example.com/search/River
 
-Adb command for testing: **adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/search/River"**
+Adb command for testing: **_adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/search/River"_**
 
 
 ### 2. Repo Details: 
 #### _Designed screen to view the repository details for the given username and repository name_
 *  This Activity should have a detailed description of the selected item.
 *  Details such as Image, Name, Project Link, Description, Contributors should be displayed.
-*  When you click on the "project link" section, you have to open a web view to show the content of the link.
+*  When you click on the "project link" section, need to open a web view to show the content of the link.
 
 **Deep link**
 
@@ -37,7 +37,7 @@ example: http://www.example.com/repoDetails/pvkrishna0007/GitRepoApp
 Adb command for testing: **_adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/repoDetails/pvkrishna0007/GitRepoApp"_**
 
 ### 3. View Repo Code/Details in WebView: 
-#### _Loaded repository related information in WebView._
+#### _Which loads repository related information in WebView._
 
 **Deep link**
 
@@ -45,10 +45,11 @@ syntax: http://www.example.com/repo/{repoPath}
 
 example: http://www.example.com/repo/pvkrishna0007/GitRepoApp
 
-Adb command for testing: **adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/repo/pvkrishna0007/GitRepoApp"**
+Adb command for testing: **_adb shell am start -a android.intent.action.VIEW -d "http://www.example.com/repo/pvkrishna0007/GitRepoApp"_**
 
+***
 
-##Following concepts are used in this project.**
+## Following concepts are used in this project.
 
 ## Navigation Library
 Contains all of your destinations and actions. The graph represents all of our app's navigation paths.

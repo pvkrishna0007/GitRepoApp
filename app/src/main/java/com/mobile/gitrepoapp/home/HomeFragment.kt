@@ -45,8 +45,9 @@ class HomeFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val repositoryName = arguments?.getString("repoName")
-        homeViewModel.queryLiveData.value = repositoryName // Repo Name here
+        arguments?.getString("repoName")?.let {
+            homeViewModel.queryLiveData.value = it // Repo Name here
+        }
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
