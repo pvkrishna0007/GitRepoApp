@@ -46,7 +46,7 @@ class HomeFragment: BaseFragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         arguments?.getString("repoName")?.let {
-            homeViewModel.queryLiveData.value = it // Repo Name here
+            homeViewModel.queryFlow.value = it // Repo Name here
         }
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner

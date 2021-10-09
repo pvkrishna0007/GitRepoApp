@@ -25,7 +25,7 @@ class HomeViewModel  @Inject constructor(
 {
     private val mJob = Job()
     private val mRepositoryScope = CoroutineScope(dispatcher + mJob)
-    val queryLiveData = MutableLiveData(AppConfig.DEFAULT_QUERY)
+    val queryFlow = MutableStateFlow(AppConfig.DEFAULT_QUERY)
     val repositoryResultsFlow : Flow<PagingData<RepoDetailModel>>
 
     init {
@@ -41,8 +41,7 @@ class HomeViewModel  @Inject constructor(
     }
 
     private fun getRepositoryListAsFlow(): Flow<PagingData<RepoDetailModel>> {
-        return queryLiveData
-            .asFlow()
+        return queryFlow
             .filter { it.length > 2 }
             .distinctUntilChanged()
             .debounce(300)

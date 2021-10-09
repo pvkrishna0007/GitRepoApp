@@ -12,7 +12,6 @@ import com.mobile.gitrepoapp.home.RepoPagingDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
-import retrofit2.http.Path
 import java.io.IOException
 
 class RepositoryImpl(private val apiInterface: ApiInterface, private val repoDatabase: RepoDatabase,
