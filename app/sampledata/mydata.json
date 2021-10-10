@@ -1,0 +1,20 @@
+{
+  "mock":
+    [
+      {
+        "name": "Gopi",
+        "age": "25",
+        "color": "#FF00FF"
+      },
+      {
+        "name": "Krishna",
+        "age": "16",
+        "color": "#FF0000"
+      },
+      {
+        "name": "Pavan",
+        "age": "45",
+        "color": "#00FF00"
+      }
+    ]
+}

@@ -51,7 +51,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lineHeight="18dp"
-                tools:text="Rick" />
+                tools:text="@sample/mydata.json/mock/name" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_status"
@@ -66,6 +66,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"
                 app:lineHeight="14dp"
+                tools:background="@sample/my_colors"
                 tools:text="@tools:sample/full_names" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -81,7 +82,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_avatar"
                 app:layout_constraintTop_toBottomOf="@+id/tv_status"
                 app:lineHeight="14dp"
-                tools:text="@tools:sample/last_names" />
+                tools:text="@sample/my_content.txt" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_contributions"
@@ -96,7 +97,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_language"
                 app:layout_constraintTop_toBottomOf="@+id/tv_status"
                 app:lineHeight="14dp"
-                tools:text="1" />
+                tools:text="@sample/mydata.json/mock/age" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

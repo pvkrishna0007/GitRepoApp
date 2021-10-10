@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.mobile.gitrepoapp.R
 import com.mobile.gitrepoapp.app.BaseFragment
 import com.mobile.gitrepoapp.databinding.FragmentHomeBinding
@@ -32,6 +33,9 @@ class HomeFragment: BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
+    val safeArgs: HomeFragmentArgs by navArgs()
+    val repositoryName = safeArgs.repoName
+
     @Inject
     lateinit var repoAdapter: RepoAdapter
     @Inject
@@ -45,9 +49,10 @@ class HomeFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        arguments?.getString("repoName")?.let {
-            homeViewModel.queryFlow.value = it // Repo Name here
-        }
+//        arguments?.getString("repoName")?.let {
+//            homeViewModel.queryFlow.value = it // Repo Name here
+//        }
+        homeViewModel.queryFlow.value = repositoryName
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -83,10 +88,16 @@ class HomeFragment: BaseFragment() {
         }
 
         repoAdapter.itemClickCallback { repoDetailModel ->
-            findNavController().navigate(R.id.action_homeFragment_to_repoDetailFragment, Bundle().apply {
-                putString("userName", repoDetailModel.owner?.login)
-                putString("repositoryName", repoDetailModel.name)
-            })
+            val action = HomeFragmentDirections.actionHomeFragmentToRepoDetailFragment(
+                userName = repoDetailModel.owner?.login ?: "",
+                repositoryName = repoDetailModel.name ?: ""
+            )
+            findNavController().navigate(action)
+
+//            findNavController().navigate(R.id.action_homeFragment_to_repoDetailFragment, Bundle().apply {
+//                putString("userName", repoDetailModel.owner?.login)
+//                putString("repositoryName", repoDetailModel.name)
+//            })
         }
 
     }

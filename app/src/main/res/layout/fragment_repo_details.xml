@@ -26,7 +26,7 @@
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"
             android:padding="10dp"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[1]" />
 
         <TextView
             android:id="@+id/tv_repo_path"
@@ -36,7 +36,7 @@
             app:prefix="@{@string/project_link}"
             app:suffix="@{repoDetails.fullName}"
             app:suffixAsLink="@{true}"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[0]" />
 
         <TextView
             android:id="@+id/tv_repo_language"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             app:prefix="@{@string/language}"
             app:suffix="@{repoDetails.language}"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[1]" />
 
         <TextView
             android:id="@+id/tv_num_forks"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             app:prefix="@{@string/fork_count}"
             app:suffix="@{repoDetails.forksCount.toString()}"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[2]" />
 
         <TextView
             android:id="@+id/tv_num_contributors"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             app:prefix="@{@string/contributors}"
             app:suffix="@{repoDetails.contributorsUrl}"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[3]" />
 
         <TextView
             android:id="@+id/tv_num_created"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             app:prefix="@{@string/created_at}"
             app:suffix="@{repoDetails.pushedAtByFormat()}"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[4]" />
 
         <TextView
             android:id="@+id/tv_description"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             app:prefix="@{@string/description}"
             app:suffix="@{repoDetails.description}"
-            tools:text="fdaf" />
+            tools:text="@sample/mydata.json/mock/name[5]" />
 
     </LinearLayout>
 </layout>
