@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.navigation.fragment.navArgs
 import com.mobile.gitrepoapp.app.BaseFragment
 import com.mobile.gitrepoapp.databinding.FragmentProjectDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +17,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RepoWebDetailsFragment: BaseFragment() {
 
-    override fun getPageTitle() = "Project Details"
+    private val safeArgs: RepoWebDetailsFragmentArgs by navArgs()
     private lateinit var binding: FragmentProjectDetailsBinding
+
+    override fun getPageTitle() = "Project Details"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +33,7 @@ class RepoWebDetailsFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repoPath = arguments?.getString("repoPath")?: "pvkrishna0007/GitRepoApp"
-        val webUrl = "https://github.com/$repoPath"
+        val webUrl = "https://github.com/${safeArgs.repoPath}"
         Log.e("TAG", "onViewCreated: $webUrl", )
 
         binding.wvContent.settings.javaScriptEnabled = true

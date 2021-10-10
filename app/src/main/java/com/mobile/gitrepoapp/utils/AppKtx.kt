@@ -8,22 +8,18 @@ import android.os.Build
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.core.text.color
 import androidx.core.text.underline
-import androidx.core.widget.doOnTextChanged
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.mobile.gitrepoapp.R
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 /**
  * To force hide the keyboard
@@ -36,7 +32,6 @@ fun View.hideSoftKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
     imm!!.hideSoftInputFromWindow(windowToken, 0)
 }
-
 
 fun Context.isNetworkAvailable(): Boolean {
     val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -75,22 +70,14 @@ fun ImageView.loadImage(imageUrl: String?) {
         .into(this)
 }
 
-fun EditText.getQueryTextChangeStateFlow(): StateFlow<String> {
-    val query = MutableStateFlow("")
-    doOnTextChanged { text, start, before, count ->
-        query.value = text?.toString()?:""
-    }
-    return query
-}
-
 @BindingAdapter(value = ["prefix", "suffix", "suffixAsLink"], requireAll = false)
 fun TextView.setContent(prefix: String?, suffix: String?, suffixAsLink: Boolean = false) {
+    this.isVisible = !suffix.isNullOrEmpty()
     this.text = SpannableStringBuilder()
         .color ( Color.DKGRAY) { append(prefix?:"") }
         .append(" :  ")
         .bold { if(suffixAsLink) underline { color(Color.BLUE) { append(suffix?:"") } } else append(suffix?:"") }
 }
-
 
 fun String?.convertToDateTimeFormat(): String {
     return this.convertStringFromSourceFormatToDestinationFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", "dd MMM yyyy HH:mm:ss")

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.mobile.gitrepoapp.R
 import com.mobile.gitrepoapp.api.Repository
 import com.mobile.gitrepoapp.api.Status
@@ -20,6 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RepoDetailFragment: BaseFragment() {
 
+    private val safeArgs: RepoDetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentRepoDetailsBinding
 
     override fun getPageTitle() = getString(R.string.repository_details)
@@ -39,15 +41,12 @@ class RepoDetailFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //https://api.github.com/repos/octocat/Hello-World
-
         getRepoDetails()
-
     }
 
     private fun getRepoDetails() {
-        val userName = arguments?.getString("userName")?:""
-        val repositoryName = arguments?.getString("repositoryName")?:""
+        val userName = safeArgs.userName
+        val repositoryName = safeArgs.repositoryName
 
         Log.e("RepoDetailFragment", "getRepoDetails: UserName:$userName  Repo:$repositoryName")
 
@@ -66,37 +65,16 @@ class RepoDetailFragment: BaseFragment() {
                     }
                 }
             })
-//        repository.getUserRepositories("pvkrishna0007", 12, 2).observe(
-//            viewLifecycleOwner,
-//            { apiResponse ->
-//                when (apiResponse.status) {
-//                    Status.LOADING -> {
-//                        Toast.makeText(context, "loading", Toast.LENGTH_SHORT).show()
-//                    }
-//                    Status.SUCCESS -> {
-//                        Toast.makeText(context, "Size: ${apiResponse.data?.size?:0}", Toast.LENGTH_SHORT).show()
-//                    }
-//                    Status.ERROR -> {
-//                        Toast.makeText(context, apiResponse.message, Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            })
     }
 
     private fun setUI(repoDetails: RepoDetailModel?) {
         binding.repoDetails = repoDetails
 
         binding.tvRepoPath.setOnClickListener {
-            findNavController().navigate(R.id.action_repoDetailFragment_to_repoWebDetailsFragment, Bundle().apply {
-                putString("repoPath", repoDetails?.fullName)
-            })
+            val action = RepoDetailFragmentDirections.actionRepoDetailFragmentToRepoWebDetailsFragment(
+                repoDetails?.fullName?:"")
+            findNavController().navigate(action)
         }
-
-//        binding.tvNumContributors.setOnClickListener {
-//            findNavController().navigate(R.id.action_repoDetailFragment_to_repoWebDetailsFragment, Bundle().apply {
-//                putString("webUrl", repoDetails?.collaboratorsUrl)
-//            })
-//        }
     }
 
 }

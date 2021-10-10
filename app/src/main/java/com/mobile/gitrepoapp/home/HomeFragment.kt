@@ -31,10 +31,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment: BaseFragment() {
 
+    private val safeArgs: HomeFragmentArgs by navArgs()
     private lateinit var binding: FragmentHomeBinding
-
-    val safeArgs: HomeFragmentArgs by navArgs()
-    val repositoryName = safeArgs.repoName
 
     @Inject
     lateinit var repoAdapter: RepoAdapter
@@ -49,10 +47,7 @@ class HomeFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        arguments?.getString("repoName")?.let {
-//            homeViewModel.queryFlow.value = it // Repo Name here
-//        }
-        homeViewModel.queryFlow.value = repositoryName
+        homeViewModel.queryFlow.value = safeArgs.repoName
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -93,11 +88,6 @@ class HomeFragment: BaseFragment() {
                 repositoryName = repoDetailModel.name ?: ""
             )
             findNavController().navigate(action)
-
-//            findNavController().navigate(R.id.action_homeFragment_to_repoDetailFragment, Bundle().apply {
-//                putString("userName", repoDetailModel.owner?.login)
-//                putString("repositoryName", repoDetailModel.name)
-//            })
         }
 
     }
