@@ -72,7 +72,9 @@ class HomeFragment: BaseFragment() {
         }
 
         binding.rvRepo.apply {
-            adapter = repoAdapter
+            adapter = repoAdapter.withLoadStateFooter(
+                footer = LoadMoreStateAdapter { repoAdapter.retry() }
+            )
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
